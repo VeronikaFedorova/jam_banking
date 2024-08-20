@@ -11,7 +11,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
   return (
     <section className='sidebar'>
       <nav className='flex flex-col gap-4'>
-        <Link href='/' className='mb-12 cursor-pointer items-center gap-2'>
+        <Link href='/' className='mb-12 cursor-pointer flex items-center gap-2'>
           <Image
             src='/icons/logo.svg'
             width={34}
@@ -22,18 +22,33 @@ const Sidebar = ({ user }: SiderbarProps) => {
           <h1 className='sidebar-logo'>Horizon</h1>
         </Link>
         {sidebarLinks.map((link) => {
-            const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`)
+            const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`);
           return (
             <Link
               href={link.route}
               key={link.label}
-              className={cn('sidebar-link', {'bg-bank-gradient': isActive})}
+              className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}
             >
-              {link.label}
+              <div className='relative size-6'>
+                <Image
+                  src={link.imgURL}
+                  alt={link.label}
+                  fill
+                  className={cn({
+                    'brightness-[3] invert-0': isActive,
+                  })}
+                />
+              </div>
+              <p className={cn('sidebar-label', { '!text-white': isActive })}>
+                {link.label}
+              </p>
             </Link>
           );
         })}
+        USER
       </nav>
+
+      FOOTER
     </section>
   );
 };
